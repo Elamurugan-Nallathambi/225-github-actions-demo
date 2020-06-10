@@ -1,10 +1,16 @@
-name: Unit testing
+name: Linting & Unit testing with code coverage Validation
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - release
+      - sit-release
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
+      - release
+      - sit-release
 
 jobs:
   test_pull_request:
@@ -15,9 +21,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
+      - name: Installing NPM packages
+        run: npm install
       - name: Lint & Standards Validation
-        run: npm ci
+        run: npm run test
       - name: Unit Testing
-        run: npm test
+        run: npm run test
       - name: Code Coverage
-        run: npm run build
+        run: npm run test
