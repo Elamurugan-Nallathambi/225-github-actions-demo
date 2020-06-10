@@ -10,13 +10,11 @@ jobs:
   test_pull_request:
     runs-on: ubuntu-latest
     steps:
+      - name: Lint & Standards Validation
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Lint & Standards Validation
       - run: npm ci
-      - name: Test
       - run: npm test
-      - name: Build
       - run: npm run build
